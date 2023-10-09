@@ -26,7 +26,10 @@ selectCalcBody.addEventListener("click", (e) => {
       checkAns = !checkAns;
       selectInputScreen.innerHTML += " " + value + " ";
       equation += value;
+      // console.log("Value coming from checkAns if", equation);
+
       ans = undefined;
+      // console.log("Value coming from checkAns if", ans);
     }
     // This is handling only first letter
     else if (!firstLetter && (!isNaN(value) || value === "-")) {
@@ -82,17 +85,22 @@ selectCalcBody.addEventListener("click", (e) => {
         selectInputScreen.innerHTML = strVal.slice(0, strVal.length - 1);
         equation = strVal.slice(0, strVal.length - 1);
       }
-      del = !del;
+      del = true;
+      // console.log("Delete true/false", del);
     } else if (firstLetter && value === "RESET") {
       selectInputScreen.innerHTML = "0";
       equation = "0";
-      firstLetter = !firstLetter;
-      reset = !reset;
+      firstLetter = false;
+      reset = false;
+      checkAns = false;
+      del = false;
     } else if (firstLetter && value === "=") {
       let newEquation = equation.replace("x", "*");
+      // console.log("New Equation", newEquation);
       ans = eval(newEquation);
       checkAns = true;
       ans = ans % 1 === 0 ? ans : ans.toFixed(3);
+      // console.log("Answer", ans);
       selectInputScreen.innerHTML = ans;
     }
   }
